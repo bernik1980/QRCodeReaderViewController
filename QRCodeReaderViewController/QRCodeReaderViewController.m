@@ -93,10 +93,6 @@
     self.showSwitchCameraButton = showSwitchCameraButton;
     self.showTorchButton        = showTorchButton;
 
-    if (cancelTitle == nil) {
-      cancelTitle = NSLocalizedString(@"Cancel", @"Cancel");
-    }
-
     [self setupUIComponentsWithCancelButtonTitle:cancelTitle];
     [self setupAutoLayoutConstraints];
 
@@ -241,12 +237,15 @@
     [self.view addSubview:_toggleTorchButton];
   }
 
-  self.cancelButton                                       = [[UIButton alloc] init];
-  _cancelButton.translatesAutoresizingMaskIntoConstraints = NO;
-  [_cancelButton setTitle:cancelButtonTitle forState:UIControlStateNormal];
-  [_cancelButton setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
-  [_cancelButton addTarget:self action:@selector(cancelAction:) forControlEvents:UIControlEventTouchUpInside];
-  [self.view addSubview:_cancelButton];
+	if (cancelButtonTitle != nil && cancelButtonTitle.length > 0)
+	{
+		self.cancelButton                                       = [[UIButton alloc] init];
+		_cancelButton.translatesAutoresizingMaskIntoConstraints = NO;
+		[_cancelButton setTitle:cancelButtonTitle forState:UIControlStateNormal];
+		[_cancelButton setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
+		[_cancelButton addTarget:self action:@selector(cancelAction:) forControlEvents:UIControlEventTouchUpInside];
+		[self.view addSubview:_cancelButton];
+	}
 }
 
 - (void)setupAutoLayoutConstraints
@@ -266,16 +265,24 @@
       leftLayoutAnchor = self.view.leftAnchor;
       rightLayoutAnchor = self.view.rightAnchor;
     }
-    
-  NSDictionary *views = NSDictionaryOfVariableBindings(_cameraView, _cancelButton);
+	
+	if (_cancelButton != nil)
+	{
+		NSDictionary *views = NSDictionaryOfVariableBindings(_cameraView, _cancelButton);
 
-  [self.view addConstraints:
-   [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_cameraView][_cancelButton(40)]" options:0 metrics:nil views:views]];
-  [[bottomLayoutAnchor constraintEqualToAnchor:_cancelButton.bottomAnchor] setActive:YES];
-  [self.view addConstraints:
-   [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_cameraView]|" options:0 metrics:nil views:views]];
-  [self.view addConstraints:
-   [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_cancelButton]-|" options:0 metrics:nil views:views]];
+		[self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_cameraView][_cancelButton(40)]" options:0 metrics:nil views:views]];
+		[[bottomLayoutAnchor constraintEqualToAnchor:_cancelButton.bottomAnchor] setActive:YES];
+		[self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_cameraView]|" options:0 metrics:nil views:views]];
+		[self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_cancelButton]-|" options:0 metrics:nil views:views]];
+	}
+	else
+	{
+		NSDictionary *views = NSDictionaryOfVariableBindings(_cameraView);
+		
+		[self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_cameraView]" options:0 metrics:nil views:views]];
+		[[bottomLayoutAnchor constraintEqualToAnchor:_cameraView.bottomAnchor] setActive:YES];
+		[self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_cameraView]|" options:0 metrics:nil views:views]];
+	}
   
   if (_switchCameraButton) {
       [NSLayoutConstraint activateConstraints:@[
