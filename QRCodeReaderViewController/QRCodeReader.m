@@ -108,6 +108,23 @@
   [_previewLayer setVideoGravity:AVLayerVideoGravityResizeAspectFill];
 }
 
+- (void)showFrontDevice
+{
+	if (_frontDeviceInput == nil)
+	{
+		return;
+	}
+	
+	AVCaptureDeviceInput *currentInput = [_session.inputs firstObject];
+	
+	if (currentInput.device.position == AVCaptureDevicePositionFront)
+	{
+		return;
+	}
+	
+	[self switchDeviceInput];
+}
+
 - (void)switchDeviceInput
 {
   if (_frontDeviceInput) {

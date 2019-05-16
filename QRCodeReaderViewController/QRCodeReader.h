@@ -123,6 +123,8 @@
  */
 - (BOOL)running;
 
+- (void)showFrontDevice;
+
 /**
  * @abstract Switch between the back and the front camera.
  * @since 3.0.0
