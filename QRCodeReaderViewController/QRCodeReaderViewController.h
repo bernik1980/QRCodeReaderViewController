@@ -27,6 +27,7 @@
 #import <UIKit/UIKit.h>
 #import "QRCodeReaderDelegate.h"
 #import "QRCodeReader.h"
+#import "QRCodeReaderView.h"
 
 /**
  * Convenient controller to display a view to scan/read 1D or 2D bar codes like
@@ -185,6 +186,8 @@
  * @since 3.0.0
  */
 - (void)stopScanning;
+
+@property (strong, nonatomic) QRCodeReaderView     *cameraView;
 
 #pragma mark - Managing the Delegate
 /** @name Managing the Delegate */

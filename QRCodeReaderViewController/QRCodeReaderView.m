@@ -36,6 +36,7 @@
 - (id)initWithFrame:(CGRect)frame
 {
   if ((self = [super initWithFrame:frame])) {
+		self.inset = 50;
     [self addOverlay];
   }
 
@@ -44,7 +45,7 @@
 
 - (void)drawRect:(CGRect)rect
 {
-  CGRect innerRect = CGRectInset(rect, 50, 50);
+  CGRect innerRect = CGRectInset(rect, self.inset, self.inset);
 
   CGFloat minSize = MIN(innerRect.size.width, innerRect.size.height);
   if (innerRect.size.width != minSize) {

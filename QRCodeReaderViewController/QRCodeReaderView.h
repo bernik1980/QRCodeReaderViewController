@@ -33,4 +33,5 @@
  */
 @interface QRCodeReaderView : UIView
 
+@property CGFloat inset;
 @end

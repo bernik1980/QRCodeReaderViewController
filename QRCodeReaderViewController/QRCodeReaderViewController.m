@@ -26,13 +26,11 @@
 
 #import "QRCodeReaderViewController.h"
 #import "QRCameraSwitchButton.h"
-#import "QRCodeReaderView.h"
 #import "QRToggleTorchButton.h"
 
 @interface QRCodeReaderViewController ()
 @property (strong, nonatomic) QRCameraSwitchButton *switchCameraButton;
 @property (strong, nonatomic) QRToggleTorchButton *toggleTorchButton;
-@property (strong, nonatomic) QRCodeReaderView     *cameraView;
 @property (strong, nonatomic) UIButton             *cancelButton;
 @property (strong, nonatomic) QRCodeReader         *codeReader;
 @property (assign, nonatomic) BOOL                 startScanningAtLoad;
