@@ -34,4 +34,6 @@
 @interface QRCodeReaderView : UIView
 
 @property CGFloat inset;
+@property (nonatomic, strong) CAShapeLayer *overlay;
+
 @end

@@ -26,11 +26,6 @@
 
 #import "QRCodeReaderView.h"
 
-@interface QRCodeReaderView ()
-@property (nonatomic, strong) CAShapeLayer *overlay;
-
-@end
-
 @implementation QRCodeReaderView
 
 - (id)initWithFrame:(CGRect)frame
